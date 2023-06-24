@@ -24,7 +24,7 @@ public class CondominiumController {
 	}
 
 	@PostMapping("/v1/condominium")
-	public void createUser(@RequestBody Condominium condominium) {
+	public void createCondominium(@RequestBody Condominium condominium) {
 		condominiumService.createOrUpdateCondominium(condominium);
 	}
 

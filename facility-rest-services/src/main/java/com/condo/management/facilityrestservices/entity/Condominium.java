@@ -5,6 +5,7 @@ import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -32,10 +33,10 @@ public class Condominium {
 	@Size(min = 6, max = 6, message = "Postal code should have exactly 6 characters")
 	private String postalCode;
 	
-	@OneToMany(mappedBy = "condominium", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "condominium", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Facility> facilities = new HashSet<>();
 	
-	@OneToMany(mappedBy = "condominium", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "condominium", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<FacilityUser> facilityUsers = new HashSet<>();
 	
 	public Condominium() {
