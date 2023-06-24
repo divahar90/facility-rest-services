@@ -2,6 +2,7 @@ package com.condo.management.facilityrestservices.service;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.condo.management.facilityrestservices.entity.FacilityUser;
@@ -10,11 +11,8 @@ import com.condo.management.facilityrestservices.repository.FacilityUserReposito
 @Service
 public class FacilityUserService {
 
+	@Autowired
 	private FacilityUserRepository userRepository;
-
-	public FacilityUserService(FacilityUserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
 
 	public FacilityUser getUser(Integer id) {
 		FacilityUser retrievedUser = null;

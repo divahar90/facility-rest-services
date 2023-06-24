@@ -3,8 +3,10 @@ package com.condo.management.facilityrestservices.entity;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
@@ -26,6 +28,9 @@ public class FacilityUser {
 
 	@Past(message = "Birth Date should be in the past")
 	private LocalDate birthDate;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Condominium condominium;
 	
 	public FacilityUser() {
 		super();
