@@ -18,11 +18,13 @@ public class FacilityService {
 	@Autowired
 	private CondominiumService condominiumService;
 
-	public Facility getFacility(Integer id) {
+	public Facility getFacility(Integer id) throws Exception {
 		Facility retrievedFacility = null;
 		Optional<Facility> facility = facilityRepository.findById(id);
 		if (facility.isPresent())
 			retrievedFacility = facility.get();
+		else
+			throw new Exception("Facility does not exist");
 
 		return retrievedFacility;
 	}

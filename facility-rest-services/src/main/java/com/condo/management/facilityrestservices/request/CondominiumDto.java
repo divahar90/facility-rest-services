@@ -1,20 +1,11 @@
-package com.condo.management.facilityrestservices.entity;
+package com.condo.management.facilityrestservices.request;
 
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Size;
 
-@Entity(name = "T_CONDOMINIUM")
-public class Condominium {
+public class CondominiumDto {
 
-	@Id
-	@GeneratedValue
 	private Integer id;
 
 	@Size(min = 5, message = "Condominium name should have atleast 5 characters")
@@ -32,14 +23,30 @@ public class Condominium {
 	@Size(min = 6, max = 6, message = "Postal code should have exactly 6 characters")
 	private String postalCode;
 	
-	@OneToMany(mappedBy = "condominium", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Facility> facilities;
+	private int condominiumId;
 	
-	@OneToMany(mappedBy = "condominium", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<FacilityUser> facilityUsers;
+	private Set<FacilityDto> facilities;
 	
-	public Condominium() {
+	public CondominiumDto() {
 		super();
+	}
+
+	public CondominiumDto(Integer id,
+			@Size(min = 5, message = "Condominium name should have atleast 5 characters") String condoName,
+			@Size(min = 5, message = "Street name should have atleast 5 characters") String streetName,
+			@Size(min = 2, max = 5, message = "Street number should be between 2 and 5 characters") String streetNumber,
+			@Size(min = 5, message = "City name should have atleast 5 characters") String city,
+			@Size(min = 6, max = 6, message = "Postal code should have exactly 6 characters") String postalCode,
+			int condominiumId, Set<FacilityDto> facilities) {
+		super();
+		this.id = id;
+		this.condoName = condoName;
+		this.streetName = streetName;
+		this.streetNumber = streetNumber;
+		this.city = city;
+		this.postalCode = postalCode;
+		this.condominiumId = condominiumId;
+		this.facilities = facilities;
 	}
 
 	public Integer getId() {
@@ -90,19 +97,20 @@ public class Condominium {
 		this.postalCode = postalCode;
 	}
 
-	public Set<Facility> getFacilities() {
+	public int getCondominiumId() {
+		return condominiumId;
+	}
+
+	public void setCondominiumId(int condominiumId) {
+		this.condominiumId = condominiumId;
+	}
+
+	public Set<FacilityDto> getFacilities() {
 		return facilities;
 	}
 
-	public void setFacilities(Set<Facility> facilities) {
+	public void setFacilities(Set<FacilityDto> facilities) {
 		this.facilities = facilities;
 	}
 
-	public Set<FacilityUser> getFacilityUsers() {
-		return facilityUsers;
-	}
-
-	public void setFacilityUsers(Set<FacilityUser> facilityUsers) {
-		this.facilityUsers = facilityUsers;
-	}
 }

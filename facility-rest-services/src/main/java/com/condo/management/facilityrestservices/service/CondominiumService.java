@@ -14,12 +14,14 @@ public class CondominiumService {
 	@Autowired
 	private CondominiumRepository condominiumRepository;
 
-	public Condominium getCondominium(Integer id) {
+	public Condominium getCondominium(Integer id) throws Exception {
 		Condominium retrievedCondo = null;
 		Optional<Condominium> condo = condominiumRepository.findById(id);
 		if (condo.isPresent())
 			retrievedCondo = condo.get();
-
+		else
+			throw new Exception("Condominium does not exist");
+		
 		return retrievedCondo;
 	}
 

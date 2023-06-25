@@ -1,24 +1,13 @@
-package com.condo.management.facilityrestservices.entity;
+package com.condo.management.facilityrestservices.request;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
-@Entity(name = "T_FACILITY_USER")
-public class FacilityUser {
+public class FacilityUserDto {
 
-	@Id
-	@GeneratedValue
 	private Integer id;
 
 	@Size(min = 2, message = "Name should have atleast 2 characters")
@@ -33,26 +22,27 @@ public class FacilityUser {
 	@Past(message = "Birth Date should be in the past")
 	private LocalDate birthDate;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Condominium condominium;
+	private CondominiumDto condominium;
 	
-	@OneToMany(mappedBy = "facilityUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<Booking> bookings = new HashSet<>();
-	
-	public FacilityUser() {
+	private List<BookingDto> bookings;
+
+	public FacilityUserDto() {
 		super();
 	}
-
-	public FacilityUser(Integer id, @Size(min = 2, message = "Name should have atleast 2 characters") String name,
+	
+	public FacilityUserDto(Integer id, @Size(min = 2, message = "Name should have atleast 2 characters") String name,
 			@Size(min = 4, message = "Unit number should have atleast 2 characters") String unitNumber,
 			@Past(message = "Move in Date should be in the past") LocalDate moveInDate,
-			@Past(message = "Birth Date should be in the past") LocalDate birthDate) {
+			@Past(message = "Birth Date should be in the past") LocalDate birthDate, CondominiumDto condominium,
+			List<BookingDto> bookings) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.unitNumber = unitNumber;
 		this.moveInDate = moveInDate;
 		this.birthDate = birthDate;
+		this.condominium = condominium;
+		this.bookings = bookings;
 	}
 
 	public Integer getId() {
@@ -95,19 +85,20 @@ public class FacilityUser {
 		this.birthDate = birthDate;
 	}
 
-	public Condominium getCondominium() {
+	public CondominiumDto getCondominium() {
 		return condominium;
 	}
 
-	public void setCondominium(Condominium condominium) {
+	public void setCondominium(CondominiumDto condominium) {
 		this.condominium = condominium;
 	}
 
-	public Set<Booking> getBookings() {
+	public List<BookingDto> getBookings() {
 		return bookings;
 	}
 
-	public void setBookings(Set<Booking> bookings) {
+	public void setBookings(List<BookingDto> bookings) {
 		this.bookings = bookings;
 	}
+	
 }

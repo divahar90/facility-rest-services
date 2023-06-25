@@ -1,12 +1,15 @@
 package com.condo.management.facilityrestservices.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.HashSet;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Size;
 
 @Entity(name = "T_FACILITY")
@@ -23,9 +26,11 @@ public class Facility {
 	
 	private boolean isOpen;
 	
-	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Condominium condominium;
+	
+	@OneToMany(mappedBy = "facility", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Booking> bookings = new HashSet<>();
 	
 	public Facility() {
 		super();

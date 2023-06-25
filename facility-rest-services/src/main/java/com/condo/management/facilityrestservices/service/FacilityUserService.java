@@ -14,12 +14,14 @@ public class FacilityUserService {
 	@Autowired
 	private FacilityUserRepository userRepository;
 
-	public FacilityUser getUser(Integer id) {
+	public FacilityUser getUser(Integer id) throws Exception {
 		FacilityUser retrievedUser = null;
 		Optional<FacilityUser> user = userRepository.findById(id);
 		if (user.isPresent())
 			retrievedUser = user.get();
-
+		else
+			throw new Exception("User does not exist");
+		
 		return retrievedUser;
 	}
 
