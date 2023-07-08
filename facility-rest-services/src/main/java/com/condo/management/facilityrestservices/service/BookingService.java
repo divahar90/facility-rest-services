@@ -34,10 +34,10 @@ public class BookingService {
 
 	}
 	
-	private void checkSlotsExists(Booking booking, int maxCapacity) throws Exception {
+	private void checkSlotsExists(Booking booking, Integer maxCapacity) throws Exception {
 		Integer totalBooked = bookingRepository.getTotalPaxPerSlotAndFacility(booking.getFromDtTime(), booking.getToDtTime(), booking.getFacility().getId());
 		totalBooked = totalBooked == null ? 0 : totalBooked;
-		if ((maxCapacity - totalBooked) < booking.getNoOfPax())
+		if ((maxCapacity - totalBooked) <= booking.getNoOfPax())
 			throw new Exception("Booking capacity exceeded, please try new slots");
 	}
 
