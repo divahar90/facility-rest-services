@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+   condo-app:
+    image: facility-rest:v1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    depends_on:
+      db:
+       condition: service_healthy
+    volumes:
+      - /data/spring-boot-app
+    environment:
+     SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/condominium
+     SPRING_DATASOURCE_USERNAME: facilityAdmin
+     SPRING_DATASOURCE_PASSWORD: facilitymgmt
+    container_name: condo-app
+    
+   db:
+     image: mysql
+     container_name: mysqldb
+     environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=condominium
+      - MYSQL_USER=facilityAdmin
+      - MYSQL_PASSWORD=facilitymgmt
+     ports:
+      - 3306:3306
+     volumes:
+      - /data/mysql-db
+     
+     healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
