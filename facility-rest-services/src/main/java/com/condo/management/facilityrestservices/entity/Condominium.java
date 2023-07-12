@@ -36,7 +36,7 @@ public class Condominium {
 	private Set<Facility> facilities;
 	
 	@OneToMany(mappedBy = "condominium", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<FacilityUser> facilityUsers;
+	private Set<User> facilityUsers;
 	
 	public Condominium() {
 		super();
@@ -98,11 +98,11 @@ public class Condominium {
 		this.facilities = facilities;
 	}
 
-	public Set<FacilityUser> getFacilityUsers() {
+	public Set<User> getFacilityUsers() {
 		return facilityUsers;
 	}
 
-	public void setFacilityUsers(Set<FacilityUser> facilityUsers) {
+	public void setFacilityUsers(Set<User> facilityUsers) {
 		this.facilityUsers = facilityUsers;
 	}
 }

@@ -20,7 +20,7 @@ public class BookingDto {
 	
 	private FacilityDto facility;
 	
-	private FacilityUserDto facilityUser;
+	private UserDto facilityUser;
 	
 	public BookingDto() {
 		super();
@@ -29,7 +29,7 @@ public class BookingDto {
 	public BookingDto(Integer id, @Future(message = "From Date should be in the future") LocalDateTime fromDtTime,
 			@Future(message = "Move in Date should be in the future") LocalDateTime toDtTime,
 			@Min(value = 1, message = "Minimum number of pax should be 1") int noOfPax, FacilityDto facility,
-			FacilityUserDto facilityUser) {
+			UserDto facilityUser) {
 		super();
 		this.id = id;
 		this.fromDtTime = fromDtTime;
@@ -79,11 +79,11 @@ public class BookingDto {
 		this.facility = facility;
 	}
 
-	public FacilityUserDto getFacilityUser() {
+	public UserDto getFacilityUser() {
 		return facilityUser;
 	}
 
-	public void setFacilityUser(FacilityUserDto facilityUser) {
+	public void setFacilityUser(UserDto facilityUser) {
 		this.facilityUser = facilityUser;
 	}
 	

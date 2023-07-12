@@ -25,14 +25,14 @@ public class Booking {
 	private Facility facility;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private FacilityUser facilityUser;
+	private User facilityUser;
 	
 	public Booking() {
 		super();
 	}
 
 	public Booking(Integer id, LocalDateTime fromDtTime, LocalDateTime toDtTime, int noOfPax, Facility facility,
-			FacilityUser facilityUser) {
+			User facilityUser) {
 		super();
 		this.id = id;
 		this.fromDtTime = fromDtTime;
@@ -82,11 +82,11 @@ public class Booking {
 		this.facility = facility;
 	}
 
-	public FacilityUser getFacilityUser() {
+	public User getFacilityUser() {
 		return facilityUser;
 	}
 
-	public void setFacilityUser(FacilityUser facilityUser) {
+	public void setFacilityUser(User facilityUser) {
 		this.facilityUser = facilityUser;
 	}
 }

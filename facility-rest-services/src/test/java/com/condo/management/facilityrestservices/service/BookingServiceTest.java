@@ -22,7 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.condo.management.facilityrestservices.entity.Booking;
 import com.condo.management.facilityrestservices.entity.Facility;
-import com.condo.management.facilityrestservices.entity.FacilityUser;
+import com.condo.management.facilityrestservices.entity.User;
 import com.condo.management.facilityrestservices.repository.BookingRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -46,7 +46,7 @@ public class BookingServiceTest {
 		facility.setMaxCapacity(25);
 		facility.setFacilityName("FacilityA");
 		booking = new Booking(1, LocalDateTime.now(), LocalDateTime.now().plusHours(1), 2, facility,
-				new FacilityUser());
+				new User());
 	}
 
 	@DisplayName("Get booking based on valid booking Id")
